@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="extract-audio",
-    version="0.31",
+    version="0.32",
     packages=["app"],
     description="Extract audio from a directory of video files.",
     long_description=long_description,
