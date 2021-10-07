@@ -2,7 +2,7 @@
 
 from pathlib import Path
 from subprocess import check_output
-from sys import argv as args
+from sys import argv as args, exit
 import threading
 
 
@@ -13,7 +13,15 @@ def extract_audio(dir_, fp):
 def main():
     dir_ = args[1]
     threads = []
-    for fp in Path(dir_).iterdir():
+    try:
+        fps = list(Path(dir_).iterdir())
+    except FileNotFoundError:
+        print("that dir doesn't exist")
+    if not fps:
+        print("no files in that dir")
+        exit()
+
+    for fp in fps:
         a = threading.Thread(
             target=extract_audio,
             args=(
