@@ -7,10 +7,11 @@ import threading
 
 
 def extract_audio(dir_, fp):
-    return check_output(f"ffmpeg -i {fp} -vn -acodec copy {dir_}{fp.stem}.m4a", shell=True)
+    return check_output(f'ffmpeg -y -i "{fp}" -vn -acodec copy "{dir_}{fp.stem}.m4a"', shell=True)
 
 
-def main(dir_):
+def main():
+    dir_ = args[1]
     threads = []
     for fp in Path(dir_).iterdir():
         a = threading.Thread(
@@ -27,5 +28,4 @@ def main(dir_):
 
 
 if __name__ == "__main__":
-    dirpath = args[1]
-    main(dirpath)
+    main()
